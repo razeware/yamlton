@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+  </head>
+  <body>
+    <section class="hero is-primary is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            yamlton
+          </h1>
+          <h2 class="subtitle">
+            there’s a million things I haven’t done
+          </h2>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section">
+      <div class="container">
+        <div class="content">
+          Use <strong>yamlton</strong> to view generic YAML as a table.
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <textarea id="yaml" class="textarea is-family-monospace" placeholder="Enter yaml here..." rows="10"></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button id="convert" class="button is-info">Convert</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="output"></div>
+      </div>
+    </section>
+
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>yamlton</strong> from <a href="https://www.raywenderlich.com">raywenderlich.com</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
