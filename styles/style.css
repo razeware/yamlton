@@ -1,0 +1,11 @@
+.u-hide {
+  display: none;
+}
+
+.jh-array-key {
+  cursor: pointer;
+}
+
+.jh-array-key::before {
+  content: '↪';
+}
