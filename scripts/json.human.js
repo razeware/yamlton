@@ -230,7 +230,7 @@
             
             for (key = 0, len = data.length; key < len; key += 1) {
               
-              keyNode = sn("th", ARRAY_KEY_CLASS_NAME, key);
+              keyNode = sn("th", ARRAY_KEY_CLASS_NAME, key + 1);
               value = data[key];
               
               if (hyperlinksEnabled && typeof(value) === "string") {
