@@ -27,7 +27,10 @@
     var result = document.createElement(tagName);
     
     result.className = className;
-    result.appendChild(document.createTextNode("" + data));
+    console.log(data);
+    if (data) {
+      result.innerHTML = data.toString().replaceAll('\n', '<br />');
+    }
     
     return result;
   }
