@@ -2,8 +2,14 @@
   display: none;
 }
 
-.jh-array-key {
+.table th.jh-array-key {
   cursor: pointer;
+  color: #3273dc;
+}
+
+.table th.jh-array-key:hover {
+  text-decoration: underline;
+  color: #363636;
 }
 
 .jh-array-key::before {
