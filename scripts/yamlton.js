@@ -15,7 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	convertButton.addEventListener('click', () => {
   	const yaml = yamlTextArea.value;
     const object = jsyaml.load(yaml);
-    const table = JsonHuman.format(object);
+    const table = JsonHuman.format(object, {
+      hyperlinks : {
+        enable : true,
+        keys: ['url'],          // Keys which will be output as links
+        target : '_blank'       // 'target' attribute of a
+      }
+    });
     output.innerHTML = table.outerHTML;
     enableCollapsingArrays(output);
   });

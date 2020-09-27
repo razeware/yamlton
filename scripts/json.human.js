@@ -191,8 +191,7 @@
           
           if( hyperlinksEnabled &&
             typeof(value) === 'string' &&
-            indexOf.call(hyperlinkKeys, key) >= 0){
-              
+            hyperlinkKeys.some((hlKey) => key.endsWith(hlKey))) {
               valNode = scn("td", OBJ_VAL_CLASS_NAME, linkNode(valNode, value, aTarget));
             } else {
               valNode = scn("td", OBJ_VAL_CLASS_NAME, valNode);
