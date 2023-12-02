@@ -69,25 +69,25 @@
           Use <strong>yamlton</strong> to create Kodeco-format quiz YAML from a spreadsheet table.
         </div>
 
-        <div class="field">
+        <div class="field is-hidden" data-quiz-mode="result">
           <div class="control">
-            <button id="reset" class="button is-info is-hidden">Reset</button>
+            <button id="reset" class="button is-info">Reset</button>
           </div>
         </div>
 
-        <div id="quiz-source-container" class="field">
+        <div class="field" data-quiz-mode="input">
           <div class="control">
-            <textarea id="quiz-source" class="textarea is-family-monospace" placeholder="Paste questions from spreadsheet here..." rows="5"></textarea>
+            <textarea id="quiz-source" class="textarea is-family-monospace" placeholder="Paste questions from spreadsheet here..." rows="5" data-quiz-reset></textarea>
           </div>
         </div>
-        <div id="quiz-table" class="box is-hidden"></div>
+        <div id="quiz-table" class="box is-hidden" data-quiz-mode="result" data-quiz-reset></div>
       </div>
     </section>
 
-    <section id="quiz-yaml-container" class="section is-hidden">
+    <section class="section is-hidden" data-quiz-mode="result">
       <div class="container">
         <h2 class="title">Quiz YAML</h2>
-        <div id="quiz-yaml" class="box"></div>
+        <div id="quiz-yaml" class="box" data-quiz-reset></div>
       </div>
     </section>
 
