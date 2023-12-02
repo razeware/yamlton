@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" integrity="sha512-ADrqa2PY1TZtb/MoLZIZu/Z/LlPaWQeDMBV73EMwjGam43/JJ5fqW38Rq8LJOVGCDfrJeOMS3Q/wRUVzW5DkjQ==" crossorigin="anonymous" />
     <link rel="stylesheet" href="/styles/style.css" />
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js" integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg==" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.14.0/js-yaml.min.js" integrity="sha512-ia9gcZkLHA+lkNST5XlseHz/No5++YBneMsDp1IZRJSbi1YqQvBeskJuG1kR+PH1w7E0bFgEZegcj0EwpXQnww==" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js" integrity="sha512-CSBhVREyzHAjAFfBlIBakjoRUKp5h7VSweP0InR/pAJyptH7peuhCsqAI/snV+TwZmXZqoUklpXp6R6wMnYf5Q==" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.0.0/marked.min.js" integrity="sha512-h8DjSP4Ck/RxwTZ0/uHyZLNzVrmo4qna/mKHedBT0n7wV1KxnR+B/UMqS/hUgIxqPmFnp5mCL0qOCfnq2hTthg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="./scripts/json.human.js"></script>
     <script defer src="./scripts/yamlton.js"></script>
   </head>
@@ -56,8 +57,8 @@
     <div class="container">
       <div class="tabs">
         <ul>
-          <li class="is-active"><a href="./index.html">Table</a></li>
-          <li><a href="./quiz.html">Quiz</a></li>
+          <li><a href="./index.html">Table</a></li>
+          <li class="is-active"><a href="./quiz.html">Quiz</a></li>
         </ul>
       </div>
     </div>
@@ -65,26 +66,28 @@
     <section class="section">
       <div class="container">
         <div class="content">
-          Use <strong>yamlton</strong> to view generic YAML as a table.
+          Use <strong>yamlton</strong> to create Kodeco-format quiz YAML from a spreadsheet table.
         </div>
 
         <div class="field">
           <div class="control">
-            <textarea id="yaml" class="textarea is-family-monospace" placeholder="Enter yaml here..." rows="10"></textarea>
+            <button id="reset" class="button is-info is-hidden">Reset</button>
           </div>
         </div>
 
-        <div class="field">
+        <div id="quiz-source-container" class="field">
           <div class="control">
-            <button id="convert" class="button is-info">Convert</button>
+            <textarea id="quiz-source" class="textarea is-family-monospace" placeholder="Paste questions from spreadsheet here..." rows="5"></textarea>
           </div>
         </div>
+        <div id="quiz-table" class="box is-hidden"></div>
       </div>
     </section>
 
-    <section class="section">
+    <section id="quiz-yaml-container" class="section is-hidden">
       <div class="container">
-        <div id="output" class="box"></div>
+        <h2 class="title">Quiz YAML</h2>
+        <div id="quiz-yaml" class="box"></div>
       </div>
     </section>
 
