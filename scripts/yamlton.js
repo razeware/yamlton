@@ -14,6 +14,10 @@ const configureQuiz = () => {
       });
     }
 
+    // Hide the error box
+    const errorBox = document.getElementById('quiz-error');
+    errorBox.classList.add('is-hidden');
+
     // Handle result and input elements
     const quizOutputElements = document.querySelectorAll('[data-quiz-mode="result"]');
     [...quizOutputElements].forEach((element) => {
@@ -29,6 +33,11 @@ const configureQuiz = () => {
     const lines = tsv.split(/\n(?=(?:(?:[^"]*"){2})*[^"]*$)/);
     const objects = lines.map(line => {
       const data = line.split('\t');
+      // Check that there are the correct number of columns
+      if(data.length !== quizHeaders.length) {
+        // Throw an exception
+        throw new Error('Invalid quiz');
+      }
       return quizHeaders.reduce((obj, header, index) => {
         obj[header] = data[index].replace(/^"|"$/g, '').replace(/""/g, '"');
         return obj;
@@ -98,7 +107,19 @@ const configureQuiz = () => {
     const text = (event.clipboardData || window.clipboardData).getData('text');
 
     // Convert imported as TSV as an object
-    const quizObject = quizTsvToObject(text);
+    let quizObject;
+    try {
+      quizObject = quizTsvToObject(text);
+    } catch (error) {
+      const errorBox = document.getElementById('quiz-error');
+      errorBox.innerHTML = `
+        <strong>Invalid quiz.</strong>  Please ensure you paste just the following columns:
+        <ul>
+          <li>${quizHeaders.join('</li><li>')}</li>
+        </ul>`;
+      errorBox.classList.remove('is-hidden');
+      return;
+    }
 
     // Pop the quiz into a table
     const tableElement = document.getElementById('quiz-table');
