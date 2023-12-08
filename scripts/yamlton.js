@@ -1,5 +1,5 @@
 const configureQuiz = () => {
-  const quizHeaders = ['Question', 'A', 'B', 'C', 'D', 'Answer', 'Explanation'];
+  const quizHeaders = ['LearningObjective', 'Question', 'A', 'B', 'C', 'D', 'Answer', 'Explanation'];
 
   const enableQuizForInput = (input) => {
     // input is a bool, if true, reset the quiz, and hide the output elements.
@@ -76,9 +76,9 @@ const configureQuiz = () => {
           { ref: 'b', option_md: question.B, correct: question.Answer === 'B' },
           { ref: 'c', option_md: question.C, correct: question.Answer === 'C' },
           { ref: 'd', option_md: question.D, correct: question.Answer === 'D' }
-        ],
+        ].filter(choice => choice.option_md !== ''),
         explanation_md: question.Explanation,
-        learning_objective: ''
+        learning_objective: question.LearningObjective,
       }
     });
   };
@@ -89,9 +89,9 @@ const configureQuiz = () => {
 
     // Wrap the questions in a quiz object
     const quiz = {
-      title: "Quiz Title",
+      title: "!!TODO!! Quiz Title",
       assessment_type: "quiz",
-      description_md: "TODO.  This can be multi-line (as long as `|` is used and indendation followed), and uses markdown. Must be a string.",
+      description_md: "!!TODO!!  This can be multi-line (as long as `|` is used and indendation followed), and uses markdown. Must be a string.",
       questions: questions
     };
 
