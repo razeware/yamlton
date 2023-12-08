@@ -1,8 +1,6 @@
-import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
 
-window.Stimulus = Application.start()
-
-Stimulus.register("markdown-editor", class extends Controller {
+export default class extends Controller {
   static values = { markdown: String };
   static targets = [ "rendered", "editor", "editorContainer", "editButton", "saveButton"];
 
@@ -34,4 +32,4 @@ Stimulus.register("markdown-editor", class extends Controller {
     this.editButtonTarget.classList.toggle("is-hidden", isEditing);
     this.saveButtonTarget.classList.toggle("is-hidden", !isEditing);
   }
-});
+};
