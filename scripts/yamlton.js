@@ -48,20 +48,102 @@ const configureQuiz = () => {
   };
 
   const createHTMLTable = (array) => {
-    let tableHTML = '<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">';
-    tableHTML += '<thead><tr>';
-    quizHeaders.forEach((header) => {
-      tableHTML += `<th>${header}</th>`;
-    });
-    tableHTML += '</tr></thead><tbody>';
-    array.forEach((item) => {
-      tableHTML += '<tr>';
+    // let tableHTML = '<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">';
+    // tableHTML += '<thead><tr>';
+    // quizHeaders.forEach((header) => {
+    //   tableHTML += `<th>${header}</th>`;
+    // });
+    // tableHTML += '</tr></thead><tbody>';
+    // array.forEach((item) => {
+    //   tableHTML += '<tr>';
+    //   for (let key in item) {
+    //     tableHTML += `
+    //     <td data-controller="markdown-editor"
+    //         data-markdown-editor-markdown-value="${item[key]}"
+    //         data-action="markdown-editor:edit@window->markdown-editor#save">
+    //       <span class="" data-markdown-editor-target="renderedContainer">
+    //         <span data-markdown-editor-target="rendered">
+    //           ${marked.parse(item[key])}
+    //         </span>
+    //         <span class="icon has-text-link" data-action="click->markdown-editor#edit">
+    //           <i class="fas fa-pencil-alt is-clickable"></i>
+    //         </span>
+    //       </span>
+
+    //       <div class="field is-hidden" data-markdown-editor-target="editorContainer">
+    //         <div class="control">
+    //           <textarea class="textarea is-small" placeholder="Small textarea" data-markdown-editor-target="editor"></textarea>
+    //         </div>
+    //         <span class="icon has-text-link" data-action="click->markdown-editor#save">
+    //           <i class="fas fa-save is-clickable"></i>
+    //         </span>
+    //       </div>
+    //     </td>`;
+    //   }
+    //   tableHTML += '</tr>';
+    // });
+    // tableHTML += '</tbody></table>';
+
+    let tableHTML = `
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+    array.forEach((item, questionNumber) => {
+      tableHTML += `
+      <tr>
+        <th>Q${questionNumber + 1}</th>
+        <td>
+          <table class="table is-fullwidth is-bordered">`;
+
       for (let key in item) {
-        tableHTML += `<td>${marked.parse(item[key])}</td>`;
+        
+        tableHTML += `
+        <tr data-controller="markdown-editor"
+            data-markdown-editor-markdown-value="${encodeURIComponent(JSON.stringify({ value: item[key] }))}">
+          <th class="is-narrow">${key}</td>
+          <td data-action="markdown-editor:edit@window->markdown-editor#save">
+            <span data-markdown-editor-target="rendered" class="content">
+              ${marked.parse(item[key])}
+            </span>
+  
+            <div class="field is-hidden" data-markdown-editor-target="editorContainer">
+              <div class="control">
+                <textarea class="textarea is-small" placeholder="Small textarea" data-markdown-editor-target="editor"></textarea>
+              </div>
+            </div>
+          </td>
+          <td class="is-narrow">
+            <button class="button is-info" data-action="click->markdown-editor#edit" data-markdown-editor-target="editButton">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+              <span>Edit</span>
+            </button>
+
+            <button class="button is-success is-hidden" data-action="click->markdown-editor#save" data-markdown-editor-target="saveButton">
+              <span class="icon">
+                <i class="fas fa-save"></i>
+              </span>
+              <span>Save</span>
+            </button>
+          </td>
+        </tr>`;
       }
-      tableHTML += '</tr>';
+      tableHTML += `
+          </table>
+        </td>
+      </tr>`;
     });
-    tableHTML += '</tbody></table>';
+
+    tableHTML += `
+        </tbody>
+      </table>`;
 
     return tableHTML;
   };
