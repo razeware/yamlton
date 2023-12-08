@@ -119,14 +119,14 @@ const configureQuiz = () => {
             </div>
           </td>
           <td class="is-narrow">
-            <button class="button is-info" data-action="click->markdown-editor#edit" data-markdown-editor-target="editButton">
+            <button class="button is-info is-small" data-action="click->markdown-editor#edit" data-markdown-editor-target="editButton">
               <span class="icon">
                 <i class="fas fa-pencil-alt"></i>
               </span>
               <span>Edit</span>
             </button>
 
-            <button class="button is-success is-hidden" data-action="click->markdown-editor#save" data-markdown-editor-target="saveButton">
+            <button class="button is-success is-small is-hidden" data-action="click->markdown-editor#save" data-markdown-editor-target="saveButton">
               <span class="icon">
                 <i class="fas fa-save"></i>
               </span>
