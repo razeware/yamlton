@@ -1,8 +1,18 @@
 import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
 
 export default class extends Controller {
-  static values = { markdown: String };
-  static targets = [ "rendered", "editor", "editorContainer", "editButton", "saveButton"];
+  static values = {
+    markdown: String,
+    questionIndex: Number,
+    field: String,
+  };
+  static targets = [
+    "rendered",
+    "editor",
+    "editorContainer",
+    "editButton",
+    "saveButton"
+  ];
 
   connect() {
     console.log('CONNECTED');
@@ -22,6 +32,14 @@ export default class extends Controller {
   save(event) {
     this.markdownValue = encodeURIComponent(JSON.stringify({ value: this.editorTarget.value }));
     this.renderedTarget.innerHTML = marked.parse(this.editorTarget.value);
+
+    this.dispatch("questionUpdated", {
+      detail: {
+        questionIndex: this.questionIndexValue,
+        field: this.fieldValue,
+        value: this.editorTarget.value
+      }
+    });
 
     this.enableEditing(false);
   }

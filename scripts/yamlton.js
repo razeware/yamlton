@@ -48,42 +48,6 @@ const configureQuiz = () => {
   };
 
   const createHTMLTable = (array) => {
-    // let tableHTML = '<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">';
-    // tableHTML += '<thead><tr>';
-    // quizHeaders.forEach((header) => {
-    //   tableHTML += `<th>${header}</th>`;
-    // });
-    // tableHTML += '</tr></thead><tbody>';
-    // array.forEach((item) => {
-    //   tableHTML += '<tr>';
-    //   for (let key in item) {
-    //     tableHTML += `
-    //     <td data-controller="markdown-editor"
-    //         data-markdown-editor-markdown-value="${item[key]}"
-    //         data-action="markdown-editor:edit@window->markdown-editor#save">
-    //       <span class="" data-markdown-editor-target="renderedContainer">
-    //         <span data-markdown-editor-target="rendered">
-    //           ${marked.parse(item[key])}
-    //         </span>
-    //         <span class="icon has-text-link" data-action="click->markdown-editor#edit">
-    //           <i class="fas fa-pencil-alt is-clickable"></i>
-    //         </span>
-    //       </span>
-
-    //       <div class="field is-hidden" data-markdown-editor-target="editorContainer">
-    //         <div class="control">
-    //           <textarea class="textarea is-small" placeholder="Small textarea" data-markdown-editor-target="editor"></textarea>
-    //         </div>
-    //         <span class="icon has-text-link" data-action="click->markdown-editor#save">
-    //           <i class="fas fa-save is-clickable"></i>
-    //         </span>
-    //       </div>
-    //     </td>`;
-    //   }
-    //   tableHTML += '</tr>';
-    // });
-    // tableHTML += '</tbody></table>';
-
     let tableHTML = `
       <table class="table is-fullwidth">
         <thead>
@@ -105,7 +69,9 @@ const configureQuiz = () => {
         
         tableHTML += `
         <tr data-controller="markdown-editor"
-            data-markdown-editor-markdown-value="${encodeURIComponent(JSON.stringify({ value: item[key] }))}">
+            data-markdown-editor-markdown-value="${encodeURIComponent(JSON.stringify({ value: item[key] }))}"
+            data-markdown-editor-question-index-value="${questionNumber}"
+            data-markdown-editor-field-value="${key}">
           <th class="is-narrow">${key}</td>
           <td data-action="markdown-editor:edit@window->markdown-editor#save">
             <span data-markdown-editor-target="rendered" class="content">
@@ -148,39 +114,6 @@ const configureQuiz = () => {
     return tableHTML;
   };
 
-
-  const convertQuizToYamlFormat = (questions) => {
-    return questions.map(question => {
-      return {
-        question_md: question.Question,
-        choices: [
-          { ref: 'a', option_md: question.A, correct: question.Answer === 'A' },
-          { ref: 'b', option_md: question.B, correct: question.Answer === 'B' },
-          { ref: 'c', option_md: question.C, correct: question.Answer === 'C' },
-          { ref: 'd', option_md: question.D, correct: question.Answer === 'D' }
-        ].filter(choice => choice.option_md !== ''),
-        explanation_md: question.Explanation,
-        learning_objective: question.LearningObjective,
-      }
-    });
-  };
-
-  const convertQuizToYaml = (quizObject) => {
-    // Convert to the YAML formatted object
-    const questions = convertQuizToYamlFormat(quizObject);
-
-    // Wrap the questions in a quiz object
-    const quiz = {
-      title: "!!TODO!! Quiz Title",
-      assessment_type: "quiz",
-      description_md: "!!TODO!!  This can be multi-line (as long as `|` is used and indendation followed), and uses markdown. Must be a string.",
-      questions: questions
-    };
-
-    // Convert to YAML, using double-quotes for strings
-    return jsyaml.dump(quiz, { quotingType: '"' });
-  };
-
   const handleQuizPaste = (event) => {
     // Prevent the default paste action
     event.preventDefault();
@@ -208,10 +141,9 @@ const configureQuiz = () => {
     const quizHtml = createHTMLTable(quizObject);
     tableElement.innerHTML = quizHtml;
 
-    // Put the reformatted text into the quiz yaml box
-    const quizYamlDiv = document.getElementById('quiz-yaml');
-    const yamlText = convertQuizToYaml(quizObject);
-    quizYamlDiv.innerHTML = `<pre><code>${yamlText}</code></pre>`;
+    // Put the quiz object into the right place
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.dataset.quizYamlQuestionsValue = JSON.stringify(quizObject);
 
     // Switch from input to output
     enableQuizForInput(false);

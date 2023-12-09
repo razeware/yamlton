@@ -64,35 +64,37 @@
       </div>
     </div>
 
-    <section class="section">
-      <div class="container">
-        <div class="notification is-danger is-hidden" id="quiz-error" data-quiz-reset></div>
-        
-        <div class="content">
-          Use <strong>yamlton</strong> to create Kodeco-format quiz YAML from a spreadsheet table.
-        </div>
-
-        <div class="field is-hidden" data-quiz-mode="result">
-          <div class="control">
-            <button id="reset" class="button is-info">Reset</button>
+    <div id="quiz-container" data-controller="quiz-yaml" data-quiz-yaml-questions-value="[]" data-action="markdown-editor:questionUpdated@window->quiz-yaml#questionUpdated">
+      <section class="section">
+        <div class="container">
+          <div class="notification is-danger is-hidden" id="quiz-error" data-quiz-reset></div>
+          
+          <div class="content">
+            Use <strong>yamlton</strong> to create Kodeco-format quiz YAML from a spreadsheet table.
           </div>
-        </div>
 
-        <div class="field" data-quiz-mode="input">
-          <div class="control">
-            <textarea id="quiz-source" class="textarea is-family-monospace" placeholder="Paste questions from spreadsheet here..." rows="5" data-quiz-reset></textarea>
+          <div class="field is-hidden" data-quiz-mode="result">
+            <div class="control">
+              <button id="reset" class="button is-info">Reset</button>
+            </div>
           </div>
-        </div>
-        <div id="quiz-table" class="box is-hidden" data-quiz-mode="result" data-quiz-reset></div>
-      </div>
-    </section>
 
-    <section class="section is-hidden" data-quiz-mode="result">
-      <div class="container">
-        <h2 class="title">Quiz YAML</h2>
-        <div id="quiz-yaml" class="box" data-quiz-reset></div>
-      </div>
-    </section>
+          <div class="field" data-quiz-mode="input">
+            <div class="control">
+              <textarea id="quiz-source" class="textarea is-family-monospace" placeholder="Paste questions from spreadsheet here..." rows="5" data-quiz-reset></textarea>
+            </div>
+          </div>
+          <div id="quiz-table" class="box is-hidden" data-quiz-mode="result" data-quiz-reset></div>
+        </div>
+      </section>
+
+      <section class="section is-hidden" data-quiz-mode="result">
+        <div class="container">
+          <h2 class="title">Quiz YAML</h2>
+          <div id="quiz-yaml" class="box" data-quiz-reset data-quiz-yaml-target="yaml"></div>
+        </div>
+      </section>
+    </div>
 
 
     <footer class="footer">
