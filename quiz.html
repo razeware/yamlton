@@ -88,10 +88,20 @@
         </div>
       </section>
 
-      <section class="section is-hidden" data-quiz-mode="result">
+      <section class="section is-hidden" data-quiz-mode="result" data-controller="clipboard">
         <div class="container">
-          <h2 class="title">Quiz YAML</h2>
-          <div id="quiz-yaml" class="box" data-quiz-reset data-quiz-yaml-target="yaml"></div>
+          <h2 class="title">
+            Quiz YAML
+            <button class="button ml-4 is-info" data-action="clipboard#copy">
+              <span class="icon is-small">
+                <i class="fa fa-copy"></i>
+              </span>
+              <span>Copy</span>
+            </button>
+          </h2>
+          <div class="box">
+            <pre><code data-quiz-yaml-target="yaml" data-clipboard-target="source"></code></pre>
+          </div>
         </div>
       </section>
     </div>

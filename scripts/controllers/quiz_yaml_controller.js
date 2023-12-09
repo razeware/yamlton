@@ -40,7 +40,7 @@ export default class extends Controller {
   questionsValueChanged() {
     // Put the reformatted text into the quiz yaml box
     const yamlText = convertQuizToYaml(this.questionsValue);
-    this.yamlTarget.innerHTML = `<pre><code>${yamlText}</code></pre>`;
+    this.yamlTarget.innerHTML = yamlText;
   }
 
   questionUpdated(event) {
