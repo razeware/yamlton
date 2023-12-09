@@ -21,11 +21,11 @@ const configureQuiz = () => {
     // Handle result and input elements
     const quizOutputElements = document.querySelectorAll('[data-quiz-mode="result"]');
     [...quizOutputElements].forEach((element) => {
-      input ? element.classList.add('is-hidden') : element.classList.remove('is-hidden');
+      element.classList.toggle('is-hidden', input);
     });
     const quizInputElements = document.querySelectorAll('[data-quiz-mode="input"]');
     [...quizInputElements].forEach((element) => {
-      input ? element.classList.remove('is-hidden') : element.classList.add('is-hidden');
+      element.classList.toggle('is-hidden', !input);
     });
   };
 
@@ -68,12 +68,13 @@ const configureQuiz = () => {
       for (let key in item) {
         
         tableHTML += `
-        <tr data-controller="markdown-editor"
+        <tr data-controller="markdown-editor quiz-question"
             data-markdown-editor-markdown-value="${encodeURIComponent(JSON.stringify({ value: item[key] }))}"
-            data-markdown-editor-question-index-value="${questionNumber}"
-            data-markdown-editor-field-value="${key}">
+            data-quiz-question-question-index-value="${questionNumber}"
+            data-quiz-question-field-value="${key}"
+            data-action="markdown-editor:markdownUpdated->quiz-question#markdownUpdated">
           <th class="is-narrow">${key}</td>
-          <td data-action="markdown-editor:edit@window->markdown-editor#save">
+          <td>
             <span data-markdown-editor-target="rendered" class="content">
               ${marked.parse(item[key])}
             </span>

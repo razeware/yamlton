@@ -38,16 +38,12 @@ export default class extends Controller {
   static targets = [ "yaml" ];
 
   questionsValueChanged() {
-    console.log('questionsValueChanged');
-    console.log(this.questionsValue);
-
     // Put the reformatted text into the quiz yaml box
     const yamlText = convertQuizToYaml(this.questionsValue);
     this.yamlTarget.innerHTML = `<pre><code>${yamlText}</code></pre>`;
   }
 
   questionUpdated(event) {
-    console.log('questionUpdated');
     const { questionIndex, field, value } = event.detail;
 
     let questions = this.questionsValue;

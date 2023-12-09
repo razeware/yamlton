@@ -3,8 +3,6 @@ import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.j
 export default class extends Controller {
   static values = {
     markdown: String,
-    questionIndex: Number,
-    field: String,
   };
   static targets = [
     "rendered",
@@ -14,30 +12,19 @@ export default class extends Controller {
     "saveButton"
   ];
 
-  connect() {
-    console.log('CONNECTED');
-  }
-
   edit() {
-    console.log('EDIT');
-    console.log(this.markdownValue);
-
     this.editorTarget.value = JSON.parse(decodeURIComponent(this.markdownValue)).value;
 
     this.enableEditing(true);
-  
-    //this.dispatch("edit", {});
   }
 
-  save(event) {
+  save() {
     this.markdownValue = encodeURIComponent(JSON.stringify({ value: this.editorTarget.value }));
     this.renderedTarget.innerHTML = marked.parse(this.editorTarget.value);
 
-    this.dispatch("questionUpdated", {
+    this.dispatch("markdownUpdated", {
       detail: {
-        questionIndex: this.questionIndexValue,
-        field: this.fieldValue,
-        value: this.editorTarget.value
+        markdown: this.editorTarget.value
       }
     });
 
