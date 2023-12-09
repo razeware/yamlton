@@ -4,6 +4,7 @@ export default class extends Controller {
   static values = {
     markdown: String,
   };
+
   static targets = [
     "rendered",
     "editor",
